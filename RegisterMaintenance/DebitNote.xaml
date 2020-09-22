@@ -1,0 +1,26 @@
+﻿<Page x:Class="RegisterMaintenance.DebitNote"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="900"
+	Title="DebitNote">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Style="{StaticResource centeredHeaderGroupBox0Style}" Grid.Column="1" Grid.ColumnSpan="1" Header="DebitNote" Height="Auto" HorizontalAlignment="Stretch" Margin="0,100,0,0" Name="chooseRegisterGroup" VerticalAlignment="Top" Width="265">
+            <Grid>
+                <Button Content="Create" Height="23" HorizontalAlignment="Stretch" Margin="40,20,40,0" Name="createButton" VerticalAlignment="Top" Width="Auto" Click="createButton_Click" />
+                <Button Content="Display/Edit" Height="23" HorizontalAlignment="Stretch" Name="displayButton" VerticalAlignment="Top" Width="Auto" Margin="40,60,40,0" Click="displayButton_Click" />
+                <Button Content="Exit" Height="23" HorizontalAlignment="Stretch" Margin="40,100,40,20" Name="exitButton" VerticalAlignment="Top" Width="Auto" Click="exitButton_Click" />
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Page>

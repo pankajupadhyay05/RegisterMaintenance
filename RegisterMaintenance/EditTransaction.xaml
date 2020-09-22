@@ -1,0 +1,323 @@
+﻿<Page x:Class="RegisterMaintenance.EditTransaction"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:rm="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+      xmlns:registerMaintenance ="clr-namespace:RegisterMaintenance.DAL"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+	Title="EditTransaction">
+
+    <Page.Resources>
+        <registerMaintenance:DecimalNullFromStringConverter x:Key="DecimalNullFromStringConverter" />
+        <Style x:Key="errorStyle" TargetType="Control">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--Row 1 Controls-->
+        <Label Style="{StaticResource headerLabel2Style}" Content="EDIT >> Transaction" Height="28" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Width="Auto" Margin="0" Name="createTransactionLabel" VerticalAlignment="Stretch" Grid.ColumnSpan="3" />
+
+        <!--Row 2 Controls-->
+        <Label Content="Serial Number:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,20,0,0" Name="serialLabel" VerticalAlignment="Top" />
+        <Label Content="Date:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,50,0,10" Name="dateLabel" VerticalAlignment="Top" />
+
+        <TextBox Grid.Row="1" HorizontalAlignment="left" Margin="100,20,0,20" Name="serialText" VerticalAlignment="Top" Width="120" IsReadOnly="True">
+            <TextBox.Text>
+                <Binding  UpdateSourceTrigger="Default" Path="Serial">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="100,50,0,10" Name="dateText" VerticalAlignment="Top" Width="120" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="Date" />
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <Button Content="PRINT COMPLETE" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="printButton" VerticalAlignment="Top" Margin="0,0,250,0" Width="120" Click="printButton_Click"/>
+        <Button Content="SALE ADVISE" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="salePrintButton" VerticalAlignment="Bottom" Margin="0,0,250,0" Width="120" Click="salePrintButton_Click"/>
+        <Button Content="PURCHASE ADVISE" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="purchasePrintButton" VerticalAlignment="Center" Margin="0,0,250,0" Width="120" Click="purchasePrintButton_Click"/>
+        <Button Content="Delete" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="deleteButton" VerticalAlignment="Stretch" Margin="0,0,160,0" Width="75" Click="deleteButton_Click"/>
+        <Button Content="Save" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="saveButton" VerticalAlignment="Stretch" Margin="0,0,80,0" Width="75" Click="saveButton_Click" />
+        <Button Content="Exit" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="cancelButton" VerticalAlignment="Stretch" Margin="0" Width="75" Click="cancelButton_Click" />
+
+        <!--Row 3 Controls-->
+
+        <!--Row 3 Column 1 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="generalLabel" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>General</Underline>
+        </TextBlock>
+
+        <Label Content="Seller Party:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="sellerLabel" VerticalAlignment="Top" />
+        <Label Content="Staion:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="stationLabel" VerticalAlignment="Top" />
+        <Label Content="Bales:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="balesLabel" VerticalAlignment="Top" />
+        <Label Content="Quality:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="qualityLabel" VerticalAlignment="Top" />
+        <Label Content="Rate/Mound:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,160,0,0" Name="ratePerMLabel" VerticalAlignment="Top" />
+        <Label Content="Broker Name:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="brokerLabel" VerticalAlignment="Top" />
+        <Label Content="Brokerage Paid:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,220,0,0" Name="brokeragePaidLabel" VerticalAlignment="Top" />
+        <Label Content="Buyer:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,250,0,0" Name="buyerLabel" VerticalAlignment="Top" />
+        <Label Content="Condition:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,280,0,0" Name="conditionLabel" VerticalAlignment="Top" />
+
+        <rm:AutoCompleteBox Name="sellerText" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170" Margin="110,40,0,0" >
+            <rm:AutoCompleteBox.SelectedItem>
+                <Binding  Mode="TwoWay" UpdateSourceTrigger="Explicit" Path="Seller">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </rm:AutoCompleteBox.SelectedItem>
+        </rm:AutoCompleteBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="110,70,0,0" Name="stationText" VerticalAlignment="Top" Width="170" CharacterCasing="Upper">
+        <TextBox.Text>
+            <Binding UpdateSourceTrigger="Explicit" Path="Station" >
+                <Binding.ValidationRules>
+                    <ExceptionValidationRule/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Left" Margin="110,100,0,0" Name="balesText" VerticalAlignment="Top" Width="170" >
+            <TextBox.Text>
+                <Binding  UpdateSourceTrigger="Explicit" Path="Bales">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="left" Margin="110,130,0,0" Name="qualityBox" VerticalAlignment="Top" Width="170">
+            <ComboBox.Text>
+                <Binding  UpdateSourceTrigger="Explicit" Path="Quality" >
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.Text>
+            <ComboBoxItem Content="Deshi MP" />
+            <ComboBoxItem Content="Deshi MP S/G" />
+            <ComboBoxItem Content="Deshi GATP Plane" />
+            <ComboBoxItem Content="GATP R-Picking Opnr"/>
+            <ComboBoxItem Content="Deshi GATP Opener" />
+            <ComboBoxItem Content="Deshi MP Opener" />
+            <ComboBoxItem Content="Deshi Maharaja" />
+            <ComboBoxItem Content="Narma S/G" />
+            <ComboBoxItem Content="Narma R/G" />
+            <ComboBoxItem Content="Yellow Picking" />
+            <ComboBoxItem Content="Delinter Cotton"/>
+        </ComboBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="110,160,0,0" Name="ratePerMoundText" VerticalAlignment="Top" Width="170" >
+            <TextBox.Text>
+                <Binding Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="RatePerMound">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="110,190,0,0" Name="brokerText" VerticalAlignment="Top" Width="170" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  UpdateSourceTrigger="Explicit" Path="Broker">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="110,220,0,0" Name="brokeragePaidText" VerticalAlignment="Top" Width="170" >
+            <TextBox.Text>
+                <Binding Converter="{StaticResource DecimalNullFromStringConverter}" Path="BrokeragePaid">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <rm:AutoCompleteBox Name="buyerText" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,250,0,0" Width="170">
+            <rm:AutoCompleteBox.SelectedItem>
+                <Binding  Mode="TwoWay" UpdateSourceTrigger="Explicit" Path="Buyer">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </rm:AutoCompleteBox.SelectedItem>
+        </rm:AutoCompleteBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="110,280,0,0" Name="conditionText" VerticalAlignment="Top" Width="170" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="Condition">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--Row 3 Column 2 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="pressRelatedLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>Press Related</Underline>
+        </TextBlock>
+
+        <Label Content="Press Date:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="pressDateLabel" VerticalAlignment="Top" />
+        <Label Content="Press Serial From:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="pressSerialFromLabel" VerticalAlignment="Top" />
+        <Label Content="Press Serial To:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="pressSerialToLabel" VerticalAlignment="Top" />
+        <Label Content="Press Mark:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="pressMarkLabel" VerticalAlignment="Top" />
+        <Label Content="Gross Weight:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,160,0,0" Name="grossWeightLabel" VerticalAlignment="Top" />
+        <Label Content="Less Tear:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="lessTearLabel" VerticalAlignment="Top" />
+        <Label Content="Less Sample:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,220,0,0" Name="lessSampleLabel" VerticalAlignment="Top" />
+        <Label Content="Less Shortage:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,250,0,0" Name="lessDamageLabel" VerticalAlignment="Top" />
+        <Label Content="Despatch Date:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,280,0,0" Name="despatchDateLabel" VerticalAlignment="Top" />
+
+        <DatePicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Name="pressDate" VerticalAlignment="Top" Width="130" Margin="120,40,0,0">
+            <DatePicker.SelectedDate>
+                <Binding  Path="PressDate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="left" Margin="120,70,0,0" Name="pressSerialFromText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding Path="PressSerialFrom">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,100,0,0" Name="pressSerialToText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding Path="PressSerialTo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="1" HorizontalAlignment="Left" Margin="120,130,0,0" Name="pressMarkText" VerticalAlignment="Top" Width="130" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="PressMark">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,160,0,0" Name="grossWeightText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="GrossWeight">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,190,0,0" Name="lessTearText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="LessTear">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,220,0,0" Name="lessSampleText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="LessSample">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,250,0,0" Name="lessDamageText" VerticalAlignment="Top" Width="130" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="LessDamage">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="120,280,0,0" Name="despatchDate" VerticalAlignment="Top" Width="130" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="DespatchDate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+        <!--Row 3 Column 3 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="othersLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>Other</Underline>
+        </TextBlock>
+
+        <Label Content="GR No:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="grNoLabel" VerticalAlignment="Top" />
+        <Label Content="Lot No:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="lotNoLabel" VerticalAlignment="Top" />
+        <Label Content="Payment Date:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="paymenDateLabel" VerticalAlignment="Top" />
+        <Label Content="Due Date:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="dueDateLabel" VerticalAlignment="Top" />
+
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="100,40,0,0" Name="grNoText" VerticalAlignment="Top" Width="130" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="GRNo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="100,70,0,0" Name="lotNo" VerticalAlignment="Top" Width="130" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="LotNo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="100,100,0,0" Name="paymentDate" VerticalAlignment="Top" Width="130" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="PaymentDate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  Margin="100,130,0,0" Name="dueDate" VerticalAlignment="Top" Width="130" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="DueDate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="rectangle1" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="3" Grid.RowSpan="3" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="rectangle2" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="3" Grid.Row="1" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Left" Margin="0" Name="rectangle4" VerticalAlignment="Stretch" Width="Auto" Grid.Row="3" Grid.Column="1" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Right" Margin="0" Name="rectangle5" VerticalAlignment="Stretch" Width="Auto" Grid.Row="3" Grid.Column="1" />
+    </Grid>
+    
+</Page>

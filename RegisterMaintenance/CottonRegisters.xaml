@@ -1,0 +1,30 @@
+﻿<Page x:Class="RegisterMaintenance.CottonRegisters"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="900"
+	Title="Cotton Registers">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Style="{StaticResource centeredHeaderGroupBox0Style}" Grid.Column="1" Grid.ColumnSpan="1" Header="Choose Register to proceed further" Height="Auto" HorizontalAlignment="Stretch" Margin="0,100,0,0" Name="chooseRegisterGroup" VerticalAlignment="Top" Width="265">
+            <Grid>
+                <Button Content="Transaction Register" Height="23" HorizontalAlignment="Stretch" Margin="40,20,40,0" Name="transactionRegisterButton" VerticalAlignment="Top" Width="Auto" Click="transactionRegisterButton_Click" />
+                <Button Content="Seller Register" Height="23" HorizontalAlignment="Stretch" Margin="40,60,40,0" Name="sellerRegisterButton" VerticalAlignment="Top" Width="Auto" Click="sellerRegisterButton_Click" />
+                <Button Content="Buyer Register" Height="23" HorizontalAlignment="Stretch" Margin="40,100,40,0" Name="buyerRegisterButton" VerticalAlignment="Top" Width="Auto" Click="buyerRegisterButton_Click" />
+                <Button Content="Invoice" Height="23" HorizontalAlignment="Stretch" Margin="40,140,40,0" Name="invoiceButton" VerticalAlignment="Top" Width="Auto" Click="invoiceButton_Click" />
+                <Button Content="Debit Note" Height="23" HorizontalAlignment="Stretch" Margin="40,180,40,0" Name="debitButton" VerticalAlignment="Top" Width="Auto" Click="debitButton_Click" />
+                <Button Content="Ledger" Height="23" HorizontalAlignment="Stretch" Margin="40,220,40,0" Name="ledgerButton" VerticalAlignment="Top" Width="Auto" Click="ledgerButton_Click" />
+                <Button Content="Exit" Height="23" HorizontalAlignment="Stretch" Margin="40,260,40,20" Name="exitButton" VerticalAlignment="Top" Width="Auto"  Click="exitButton_Click"/>
+            </Grid>
+        </GroupBox>
+        
+    </Grid>
+</Page>

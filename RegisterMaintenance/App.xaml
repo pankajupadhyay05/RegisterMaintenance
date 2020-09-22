@@ -1,0 +1,1540 @@
+﻿<Application x:Class="RegisterMaintenance.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RegisterMaintenance.DAL"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        
+        <!--Color resources-->
+
+        <Color x:Key="MainColor">#FF939393</Color>
+        <Color x:Key="HoverColor">#FFAAAAAA</Color>
+        <Color x:Key="DefaultColor">#FF9BB1C5</Color>
+        <SolidColorBrush x:Key="LightBrush" Color="#FFAFAFAF" />
+        <SolidColorBrush x:Key="ShadeBrush" Color="#FF9F9F9F" />
+
+        <Color x:Key="TopGradientSelectColor">#FFFFFFFF</Color>
+        <Color x:Key="BottomGradientSelectColor">#FF999999</Color>
+
+        <Color x:Key="BlackColor">#FF000000</Color>
+        <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+
+        <SolidColorBrush x:Key="TextBrush" Color="#FF000000" />
+        <SolidColorBrush x:Key="NormalBrush" Color="{StaticResource MainColor}" />
+        <SolidColorBrush x:Key="NormalBorderBrush" Color="#FF9B9999" />
+        <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}" />
+        <SolidColorBrush x:Key="GlyphBrush" Color="#FFFFFFFF" />
+
+        <LinearGradientBrush x:Key="PressedBrush" EndPoint="0.5,0.971" StartPoint="0.5,0.042">
+            <GradientStop Color="#4C000000" Offset="0" />
+            <GradientStop Color="#26FFFFFF" Offset="1" />
+            <GradientStop Color="#4C000000" Offset="0.467" />
+            <GradientStop Color="#26FFFFFF" Offset="0.479" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFD6D6D6" />
+
+        <LinearGradientBrush x:Key="SelectedBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{StaticResource TopGradientSelectColor}" Offset="0" />
+            <GradientStop Color="{StaticResource BottomGradientSelectColor}" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+        <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#FFD4D4D4" />
+        <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFFFFFFF" />
+
+
+        <!-- EXPRESSION COMMON VALUES -->
+
+        <LinearGradientBrush x:Key="ShineBrush" EndPoint="0.5,0.971" StartPoint="0.5,0.042">
+            <GradientStop Color="#59FFFFFF" Offset="0" />
+            <GradientStop Color="#00FFFFFF" Offset="1" />
+            <GradientStop Color="#26FFFFFF" Offset="0.467" />
+            <GradientStop Color="#00FFFFFF" Offset="0.475" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HoverShineBrush" EndPoint="0.5,0.971" StartPoint="0.5,0.042">
+            <GradientStop Color="#4CFFFFFF" Offset="0" />
+            <GradientStop Color="#26FFFFFF" Offset="1" />
+            <GradientStop Color="#26FFFFFF" Offset="0.467" />
+            <GradientStop Color="#00FFFFFF" Offset="0.475" />
+            <GradientStop Color="#00FFFFFF" Offset="0.856" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="PressedBorderBrush" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#444" Offset="0.0" />
+            <GradientStop Color="#888" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DefaultedBorderBrush" Color="{StaticResource DefaultColor}" />
+        <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+
+        <Style x:Key="NuclearButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border>
+                            <Rectangle Margin="2" Stroke="#60000000" StrokeThickness="1" StrokeDashArray="1 2" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--End-->
+
+        <!--Default Control Customization-->
+
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0" />
+                        <GradientStop Color="#FF8399A9" Offset="0.375" />
+                        <GradientStop Color="#FF718597" Offset="0.375" />
+                        <GradientStop Color="#FF617584" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Grid>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" Background="{DynamicResource ControlBackgroundBrush}" />
+                            <ScrollViewer Margin="1" Style="{DynamicResource NuclearScrollViewer}" Focusable="false" Background="{x:Null}">
+                                <StackPanel Margin="1,1,1,1" IsItemsHost="true" />
+                            </ScrollViewer>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border" />
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style d:IsControlPart="True" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="HoverOn">
+
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+
+                            </Storyboard>
+                            <Storyboard x:Key="HoverOff">
+
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+
+                            </Storyboard>
+                            <Storyboard x:Key="SelectedOn">
+
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SelectedRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+
+                            </Storyboard>
+                            <Storyboard x:Key="SelectedOff">
+
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="SelectedRectangle" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+
+                            </Storyboard>
+                            <Storyboard x:Key="FocussedOn">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="FocussedOff">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid SnapsToDevicePixels="true" Margin="1,1,1,1">
+                            <Rectangle x:Name="Background" IsHitTestVisible="False" Opacity="0.25" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                            <Rectangle x:Name="HoverRectangle" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource NormalBrush}" RadiusX="1" RadiusY="1"/>
+                            <Rectangle x:Name="SelectedRectangle" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource SelectedBackgroundBrush}" RadiusX="1" RadiusY="1"/>
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,2,0,2" x:Name="contentPresenter" />
+                            <Rectangle x:Name="FocusVisualElement" Stroke="{StaticResource HoverShineBrush}" StrokeThickness="1" RadiusX="1" RadiusY="1" Opacity="0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource FocussedOff}" x:Name="FocussedOff_BeginStoryboard"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource FocussedOn}" x:Name="FocussedOn_BeginStoryboard"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard x:Name="SelectedOff_BeginStoryboard" Storyboard="{StaticResource SelectedOff}"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard x:Name="SelectedOn_BeginStoryboard" Storyboard="{StaticResource SelectedOn}"/>
+                                </Trigger.EnterActions>
+
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="Selector.IsSelected" Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource HoverOn}"/>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard x:Name="HoverOff_BeginStoryboard" Storyboard="{StaticResource HoverOff}"/>
+                                </MultiTrigger.ExitActions>
+
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelected" Value="True" />
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Style.Triggers>
+                <Trigger Property="Selector.IsSelected" Value="True">
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FFFFFF" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Menu}">
+            <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Menu}">
+                        <Grid>
+                            <Border Margin="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                            <StackPanel Background="{TemplateBinding Background}" IsItemsHost="True" ClipToBounds="True" Orientation="Horizontal" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="1.5" Softness="0.15" />
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="HighlightedOn">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverShineBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="HightlightedOff">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverShineBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="HoverBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border x:Name="Border" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,0,0,0" Margin="3,2,3,2">
+                            <Grid Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+                                    <ColumnDefinition Width="14" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Grid.ColumnSpan="4" Background="{DynamicResource HoverBrush}" Opacity="0" x:Name="HoverBorder" CornerRadius="1,1,1,1"/>
+                                <Border Grid.ColumnSpan="4" Background="{DynamicResource HoverShineBrush}" Opacity="0" x:Name="HoverShineBorder" CornerRadius="1,1,1,1"/>
+                                <ContentPresenter Margin="4,0,6,0" x:Name="Icon" VerticalAlignment="Center" ContentSource="Icon" />
+                                <Grid Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel" VerticalAlignment="Center">
+                                    <Path x:Name="GlyphPanelpath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,2 L0,4.8 L2.5,7.4 L7.1,2.8 L7.1,0 L2.5,4.6 z" FlowDirection="LeftToRight" />
+                                </Grid>
+                                <ContentPresenter Grid.Column="1" x:Name="HeaderHost" RecognizesAccessKey="True" ContentSource="Header" Margin="2,1,2,1" />
+                                <Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">
+                                    <Path x:Name="ArrowPanelPath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,0 L0,8 L4,4 z" />
+                                </Grid>
+                                <Popup IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" AllowsTransparency="true" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                    <Grid x:Name="SubMenu">
+                                        <Border x:Name="SubMenuBorder" Background="{DynamicResource LightBrush}" BorderThickness="1" Opacity="0.8">
+                                            <Border.BorderBrush>
+                                                <SolidColorBrush Color="{DynamicResource WhiteColor}" />
+                                            </Border.BorderBrush>
+                                        </Border>
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Role" Value="TopLevelHeader">
+                                <Setter Property="Margin" Value="0,1,0,1" />
+                                <Setter Property="Padding" Value="6,3,6,3" />
+                                <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+                                <Setter Property="Placement" Value="Bottom" TargetName="SubMenuPopup" />
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                            </Trigger>
+                            <Trigger Property="Role" Value="TopLevelItem">
+                                <Setter Property="Margin" Value="0,1,0,1" />
+                                <Setter Property="Padding" Value="6,3,6,3" />
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                            </Trigger>
+                            <Trigger Property="Role" Value="SubmenuHeader">
+                                <Setter Property="DockPanel.Dock" Value="Top" />
+                                <Setter Property="Padding" Value="0,2,0,2" />
+                                <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+                            </Trigger>
+                            <Trigger Property="Role" Value="SubmenuItem">
+                                <Setter Property="DockPanel.Dock" Value="Top" />
+                                <Setter Property="Padding" Value="0,2,0,2" />
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="ArrowPanel" />
+                            </Trigger>
+                            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                                <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup" />
+                            </Trigger>
+                            <Trigger Property="Icon" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Visibility" Value="Visible" TargetName="GlyphPanel" />
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="Icon" />
+                            </Trigger>
+                            <Trigger Property="AllowsTransparency" SourceName="SubMenuPopup" Value="true">
+                                <Setter Property="Margin" Value="0,0,3,3" TargetName="SubMenu" />
+                                <Setter Property="SnapsToDevicePixels" Value="true" TargetName="SubMenu" />
+                                <Setter Property="BitmapEffect" Value="{DynamicResource PopupDropShadow}" TargetName="SubMenuBorder" />
+                            </Trigger>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource HightlightedOff}" x:Name="HightlightedOff_BeginStoryboard"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource HighlightedOn}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Separator}">
+            <Setter Property="Height" Value="1" />
+            <Setter Property="Margin" Value="0,2,0,2" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Separator}">
+                        <Border BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--End-->
+        
+        <!--Key-Based Control Customization-->
+        <local:CenterBorderGapMaskConverter x:Key="CenterBorderGapMaskConverter"/>
+        
+        <Style x:Key="centeredHeaderGroupBox0Style" TargetType="{x:Type GroupBox}">
+            <Setter Property="BorderBrush" Value="#D5DFE5"/>
+            <Setter Property="Foreground" Value="#3B5998" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="6"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                            <Border Grid.ZIndex="2" x:Name="Header" Grid.Column="2" HorizontalAlignment="Center" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+                            <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border RenderTransformOrigin="0.5,0.5" BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                <Border.OpacityMask>
+                                    <MultiBinding ConverterParameter="7" Converter="{StaticResource CenterBorderGapMaskConverter}">
+                                        <Binding ElementName="Header" Path="ActualWidth"/>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="centeredHeaderGroupBoxStyle" TargetType="{x:Type GroupBox}">
+            <Setter Property="BorderBrush" Value="#D5DFE5"/>
+            <Setter Property="Foreground" Value="#3B5998" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="6"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3"/>
+                            <Border Grid.ZIndex="2" x:Name="Header" Grid.Column="2" HorizontalAlignment="Center" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+                            <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border RenderTransformOrigin="0.5,0.5" BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4" CornerRadius="4" Grid.Row="1" Grid.RowSpan="3">
+                                <Border.OpacityMask>
+                                    <MultiBinding ConverterParameter="7" Converter="{StaticResource CenterBorderGapMaskConverter}">
+                                        <Binding ElementName="Header" Path="ActualWidth"/>
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Border.OpacityMask>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                </Border>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Dark Colors -->
+        <!--<ResourceDictionary Source="Theme/ShinyRed.xaml"/>-->
+        
+        <Style x:Key="footerLabelStyle" TargetType="Label" >
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Background" Value="#F2F2F2"  />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="10,0,10,0" />
+            <Setter Property="Padding" Value="5,5,10,0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderBrush" Value="#E2E2E2" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style x:Key="rectangleStyle" TargetType="Rectangle">
+            <Setter Property="Stroke" Value="#627AAD"/>
+            <Setter Property="StrokeThickness" Value=".25" />
+        </Style>
+        
+        <Style x:Key="headerLabel0Style" TargetType="Label">
+            <Setter Property="Background" Value="#3B5998" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Width" Value="170" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        
+        <Style x:Key="headerLabelStyle" TargetType="Label">
+            <Setter Property="Background" Value="#627AAD" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="headerLabel2Style" TargetType="Label">
+            <Setter Property="Background" Value="#F2F2F2" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="headerLabel3Style" TargetType="Label">
+            <Setter Property="Background" Value="#3D7B8D" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#333333" />
+        </Style>
+        
+        <Style x:Key="groupBoxHeaderStyle" TargetType="Control">
+            <Setter Property="Foreground" Value="#3B5998" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style x:Key="gridViewHeaderColumnStyle" TargetType="Control">
+            <Setter Property="Background" Value="#3B5998" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="13" />
+        </Style> 
+
+        <Style x:Key="listViewStyle" TargetType="ListViewItem">
+            <Setter Property="Foreground" Value="#627AAD" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+        
+        <Style x:Key="listBoxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Foreground" Value="#3B5998" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="BorderBrush" Value="#3B5998" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#627AAD" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="textStyleTextBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#627AAD" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="smallTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#627AAD"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+       
+        <DataTemplate x:Key="detailsTransactionListingTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0"
+                           Name="serialTitle"
+                           Style="{StaticResource smallTitleStyle}">Serial:</TextBlock>
+                <TextBlock Name="serialDTKey" Grid.Row="0" Grid.Column="1" 
+                    Text="{Binding Path=Serial}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+                
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0"
+                           Name="dateTitle"
+                           Style="{StaticResource smallTitleStyle}">Date:</TextBlock>
+                <TextBlock Name="dateDTKey" Grid.Row="1" Grid.Column="1" 
+                    Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0"
+                           Name="sellerTitle"
+                           Style="{StaticResource smallTitleStyle}">Seller:</TextBlock>
+                <TextBlock Name="sellerDTKey" Grid.Row="2" Grid.Column="1" 
+                    Text="{Binding Path=Seller}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0"
+                           Name="stationTitle"
+                           Style="{StaticResource smallTitleStyle}">Station:</TextBlock>
+                <TextBlock Name="stationDTKey" Grid.Row="3" Grid.Column="1" 
+                    Text="{Binding Path=Station}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0"
+                           Name="balesTitle"
+                           Style="{StaticResource smallTitleStyle}">Bales:</TextBlock>
+                <TextBlock Name="balesDTKey" Grid.Row="4" Grid.Column="1" 
+                    Text="{Binding Path=Bales}" 
+                     Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0"
+                           Name="qualityTitle"
+                           Style="{StaticResource smallTitleStyle}">Quality:</TextBlock>
+                <TextBlock Name="qualityDTKey" Grid.Row="5" Grid.Column="1" 
+                    Text="{Binding Path=Quality}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0"
+                           Name="ratePerMTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Mound:</TextBlock>
+                <TextBlock Name="ratePerMDTKey" Grid.Row="6" Grid.Column="1" 
+                    Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0"
+                           Name="ratePerQTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Quintal:</TextBlock>
+                <TextBlock Name="ratePerQDTKey" Grid.Row="7" Grid.Column="1" 
+                    Text="{Binding Path=RatePerQuintal, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Margin="0"
+                           Name="conditionTitle"
+                           Style="{StaticResource smallTitleStyle}">Condition:</TextBlock>
+                <TextBlock Name="conditionDTKey" Grid.Row="8" Grid.Column="1" 
+                    Text="{Binding Path=Condition}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0"
+                           Name="paymentDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Payment Date:</TextBlock>
+                <TextBlock Name="paymentDateDTKey" Grid.Row="9" Grid.Column="1" 
+                    Text="{Binding Path=PaymentDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Margin="0"
+                           Name="brokerTitle"
+                           Style="{StaticResource smallTitleStyle}">Broker:</TextBlock>
+                <TextBlock Name="brokerDTKey" Grid.Row="10" Grid.Column="1" 
+                    Text="{Binding Path=Broker}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Margin="0"
+                           Name="brokeragePaidTitle"
+                           Style="{StaticResource smallTitleStyle}">BrokeragePaid:</TextBlock>
+                <TextBlock Name="brokeragePaidDTKey" Grid.Row="11" Grid.Column="1" 
+                    Text="{Binding Path=BrokeragePaid}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="0"
+                           Name="amountTitle"
+                           Style="{StaticResource smallTitleStyle}">Amound:</TextBlock>
+                <TextBlock Name="amountDTKey" Grid.Row="12" Grid.Column="1" 
+                    Text="{Binding Path=Amount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Margin="0"
+                           Name="buyerTitle"
+                           Style="{StaticResource smallTitleStyle}">Buyer:</TextBlock>
+                <TextBlock Name="buyerDTKey" Grid.Row="13" Grid.Column="1" 
+                    Text="{Binding Path=Buyer}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Margin="0"
+                           Name="pressSerialFromTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial From:</TextBlock>
+                <TextBlock Name="pressSerialFromDTKey" Grid.Row="14" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialFrom}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="15" Grid.Column="0" Margin="0"
+                           Name="pressSerialToTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial To:</TextBlock>
+                <TextBlock Name="pressSerialToDTKey" Grid.Row="15" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialTo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="0"
+                           Name="pressMarkTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Mark:</TextBlock>
+                <TextBlock Name="pressMarkDTKey" Grid.Row="16" Grid.Column="1" 
+                    Text="{Binding Path=PressMark}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="17" Grid.Column="0" Margin="0"
+                           Name="grossWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Gross Weight:</TextBlock>
+                <TextBlock Name="grossWeightDTKey" Grid.Row="17" Grid.Column="1" 
+                    Text="{Binding Path=GrossWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="18" Grid.Column="0" Margin="0"
+                           Name="lessTearTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Tear:</TextBlock>
+                <TextBlock Name="lessTearDTKey" Grid.Row="18" Grid.Column="1" 
+                    Text="{Binding Path=LessTear}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="19" Grid.Column="0" Margin="0"
+                           Name="lessSampleTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Sample:</TextBlock>
+                <TextBlock Name="lessSampleDTKey" Grid.Row="19" Grid.Column="1" 
+                    Text="{Binding Path=LessSample}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="20" Grid.Column="0" Margin="0"
+                           Name="lessDamageTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Damage:</TextBlock>
+                <TextBlock Name="lessDamageDTKey" Grid.Row="20" Grid.Column="1" 
+                    Text="{Binding Path=LessDamage}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="21" Grid.Column="0" Margin="0"
+                           Name="netWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Net Weight:</TextBlock>
+                <TextBlock Name="netWeightDTKey" Grid.Row="21" Grid.Column="1" 
+                    Text="{Binding Path=NetWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="22" Grid.Column="0" Margin="0"
+                           Name="despatchDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Despatch Date:</TextBlock>
+                <TextBlock Name="despatchDateDTKey" Grid.Row="22" Grid.Column="1" 
+                    Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="23" Grid.Column="0" Margin="0"
+                           Name="gRNoTitle"
+                           Style="{StaticResource smallTitleStyle}">GR No:</TextBlock>
+                <TextBlock Name="gRNoDTKey" Grid.Row="23" Grid.Column="1" 
+                    Text="{Binding Path=GRNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="24" Grid.Column="0" Margin="0"
+                           Name="pressDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Date:</TextBlock>
+                <TextBlock Name="pressDateDTKey" Grid.Row="24" Grid.Column="1" 
+                    Text="{Binding Path=PressDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="detailsSellerListingTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0"
+                           Name="serialTitle"
+                           Style="{StaticResource smallTitleStyle}">Serial:</TextBlock>
+                <TextBlock Name="serialDTKey" Grid.Row="0" Grid.Column="1" 
+                    Text="{Binding Path=Serial}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0"
+                           Name="dateTitle"
+                           Style="{StaticResource smallTitleStyle}">Date:</TextBlock>
+                <TextBlock Name="dateDTKey" Grid.Row="1" Grid.Column="1" 
+                    Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0"
+                           Name="buyerTitle"
+                           Style="{StaticResource smallTitleStyle}">Buyer:</TextBlock>
+                <TextBlock Name="buyerDTKey" Grid.Row="2" Grid.Column="1" 
+                    Text="{Binding Path=Buyer}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0"
+                           Name="balesTitle"
+                           Style="{StaticResource smallTitleStyle}">Bales:</TextBlock>
+                <TextBlock Name="balesDTKey" Grid.Row="3" Grid.Column="1" 
+                    Text="{Binding Path=Bales}" 
+                     Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0"
+                           Name="qualityTitle"
+                           Style="{StaticResource smallTitleStyle}">Quality:</TextBlock>
+                <TextBlock Name="qualityDTKey" Grid.Row="4" Grid.Column="1" 
+                    Text="{Binding Path=Quality}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0"
+                           Name="ratePerMTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Mound:</TextBlock>
+                <TextBlock Name="ratePerMDTKey" Grid.Row="5" Grid.Column="1" 
+                    Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0"
+                           Name="ratePerQTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Quintal:</TextBlock>
+                <TextBlock Name="ratePerQDTKey" Grid.Row="6" Grid.Column="1" 
+                    Text="{Binding Path=RatePerQuintal, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0"
+                           Name="conditionTitle"
+                           Style="{StaticResource smallTitleStyle}">Condition:</TextBlock>
+                <TextBlock Name="conditionDTKey" Grid.Row="7" Grid.Column="1" 
+                    Text="{Binding Path=Condition}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Margin="0"
+                           Name="paymentDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Payment Date:</TextBlock>
+                <TextBlock Name="paymentDateDTKey" Grid.Row="8" Grid.Column="1" 
+                    Text="{Binding Path=PaymentDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0"
+                           Name="brokerTitle"
+                           Style="{StaticResource smallTitleStyle}">Broker:</TextBlock>
+                <TextBlock Name="brokerDTKey" Grid.Row="9" Grid.Column="1" 
+                    Text="{Binding Path=Broker}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Margin="0"
+                           Name="amountTitle"
+                           Style="{StaticResource smallTitleStyle}">Amound:</TextBlock>
+                <TextBlock Name="amountDTKey" Grid.Row="10" Grid.Column="1" 
+                    Text="{Binding Path=Amount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Margin="0"
+                           Name="pressSerialFromTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial From:</TextBlock>
+                <TextBlock Name="pressSerialFromDTKey" Grid.Row="11" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialFrom}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="0"
+                           Name="pressSerialToTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial To:</TextBlock>
+                <TextBlock Name="pressSerialToDTKey" Grid.Row="12" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialTo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Margin="0"
+                           Name="pressMarkTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Mark:</TextBlock>
+                <TextBlock Name="pressMarkDTKey" Grid.Row="13" Grid.Column="1" 
+                    Text="{Binding Path=PressMark}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Margin="0"
+                           Name="pressDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Date:</TextBlock>
+                <TextBlock Name="pressDateDTKey" Grid.Row="14" Grid.Column="1" 
+                    Text="{Binding Path=PressDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="15" Grid.Column="0" Margin="0"
+                           Name="dueDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Due Date:</TextBlock>
+                <TextBlock Name="dueDateDTKey" Grid.Row="15" Grid.Column="1" 
+                    Text="{Binding Path=DueDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="0"
+                           Name="netWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Net Weight:</TextBlock>
+                <TextBlock Name="netWeightDTKey" Grid.Row="16" Grid.Column="1" 
+                    Text="{Binding Path=NetWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="17" Grid.Column="0" Margin="0"
+                           Name="despatchDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Despatch Date:</TextBlock>
+                <TextBlock Name="despatchDateDTKey" Grid.Row="17" Grid.Column="1" 
+                    Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="detailsBuyerListingTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0"
+                           Name="serialTitle"
+                           Style="{StaticResource smallTitleStyle}">Serial:</TextBlock>
+                <TextBlock Name="serialDTKey" Grid.Row="0" Grid.Column="1" 
+                    Text="{Binding Path=Serial}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0"
+                           Name="dateTitle"
+                           Style="{StaticResource smallTitleStyle}">Date:</TextBlock>
+                <TextBlock Name="dateDTKey" Grid.Row="1" Grid.Column="1" 
+                    Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0"
+                           Name="sellerTitle"
+                           Style="{StaticResource smallTitleStyle}">Seller:</TextBlock>
+                <TextBlock Name="sellerDTKey" Grid.Row="4" Grid.Column="1" 
+                    Text="{Binding Path=Seller}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0"
+                           Name="stationTitle"
+                           Style="{StaticResource smallTitleStyle}">Station:</TextBlock>
+                <TextBlock Name="stationDTKey" Grid.Row="5" Grid.Column="1" 
+                    Text="{Binding Path=Bales}" 
+                     Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0"
+                           Name="balesTitle"
+                           Style="{StaticResource smallTitleStyle}">Bales:</TextBlock>
+                <TextBlock Name="balesDTKey" Grid.Row="6" Grid.Column="1" 
+                    Text="{Binding Path=Bales}" 
+                     Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0"
+                           Name="qualityTitle"
+                           Style="{StaticResource smallTitleStyle}">Quality:</TextBlock>
+                <TextBlock Name="qualityDTKey" Grid.Row="7" Grid.Column="1" 
+                    Text="{Binding Path=Quality}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Margin="0"
+                           Name="ratePerMTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Mound:</TextBlock>
+                <TextBlock Name="ratePerMDTKey" Grid.Row="8" Grid.Column="1" 
+                    Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0"
+                           Name="ratePerQTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Quintal:</TextBlock>
+                <TextBlock Name="ratePerQDTKey" Grid.Row="9" Grid.Column="1" 
+                    Text="{Binding Path=RatePerQuintal, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Margin="0"
+                           Name="conditionTitle"
+                           Style="{StaticResource smallTitleStyle}">Condition:</TextBlock>
+                <TextBlock Name="conditionDTKey" Grid.Row="10" Grid.Column="1" 
+                    Text="{Binding Path=Condition}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Margin="0"
+                           Name="paymentDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Payment Date:</TextBlock>
+                <TextBlock Name="paymentDateDTKey" Grid.Row="11" Grid.Column="1" 
+                    Text="{Binding Path=PaymentDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="0"
+                           Name="pressSerialFromTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial From:</TextBlock>
+                <TextBlock Name="pressSerialFromDTKey" Grid.Row="12" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialFrom}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Margin="0"
+                           Name="pressSerialToTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Serial To:</TextBlock>
+                <TextBlock Name="pressSerialToDTKey" Grid.Row="13" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialTo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Margin="0"
+                           Name="pressMarkTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Mark:</TextBlock>
+                <TextBlock Name="pressMarkDTKey" Grid.Row="14" Grid.Column="1" 
+                    Text="{Binding Path=PressMark}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="15" Grid.Column="0" Margin="0"
+                           Name="netWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Net Weight:</TextBlock>
+                <TextBlock Name="netWeightDTKey" Grid.Row="15" Grid.Column="1" 
+                    Text="{Binding Path=NetWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="0"
+                           Name="despatchDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Despatch Date:</TextBlock>
+                <TextBlock Name="despatchDateDTKey" Grid.Row="16" Grid.Column="1" 
+                    Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="17" Grid.Column="0" Margin="0"
+                           Name="invoiceNoTitle"
+                           Style="{StaticResource smallTitleStyle}">Invoice No:</TextBlock>
+                <TextBlock Name="invoiceNoDTKey" Grid.Row="17" Grid.Column="1" 
+                    Text="{Binding Path=InvoiceNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="18" Grid.Column="0" Margin="0"
+                           Name="debitNoteNoTitle"
+                           Style="{StaticResource smallTitleStyle}">DebitNote No:</TextBlock>
+                <TextBlock Name="debitNoteNoDTKey" Grid.Row="18" Grid.Column="1" 
+                    Text="{Binding Path=DebitNoteNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+                
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="detailsInvoiceListingTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0"
+                           Name="invoiceNoTitle"
+                           Style="{StaticResource smallTitleStyle}">Invoice No:</TextBlock>
+                <TextBlock Name="invoiceNoDTKey" Grid.Row="0" Grid.Column="1" 
+                    Text="{Binding Path=InvoiceNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0"
+                           Name="invocieDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Invoice Date:</TextBlock>
+                <TextBlock Name="invoiceDateDTKey" Grid.Row="1" Grid.Column="1" 
+                    Text="{Binding Path=InvoiceDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0"
+                           Name="buyerTitle"
+                           Style="{StaticResource smallTitleStyle}">Buyer:</TextBlock>
+                <TextBlock Name="buyerDTKey" Grid.Row="2" Grid.Column="1" 
+                    Text="{Binding Path=Buyer}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0"
+                           Name="stationTitle"
+                           Style="{StaticResource smallTitleStyle}">Station:</TextBlock>
+                <TextBlock Name="stationDTKey" Grid.Row="3" Grid.Column="1" 
+                    Text="{Binding Path=Station}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0"
+                           Name="balesTitle"
+                           Style="{StaticResource smallTitleStyle}">Bales:</TextBlock>
+                <TextBlock Name="balesDTKey" Grid.Row="4" Grid.Column="1" 
+                    Text="{Binding Path=Bales}" 
+                     Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0"
+                           Name="qualityTitle"
+                           Style="{StaticResource smallTitleStyle}">Quality:</TextBlock>
+                <TextBlock Name="qualityDTKey" Grid.Row="5" Grid.Column="1" 
+                    Text="{Binding Path=Quality}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0"
+                           Name="ratePerMTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Mound:</TextBlock>
+                <TextBlock Name="ratePerMDTKey" Grid.Row="6" Grid.Column="1" 
+                    Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0"
+                           Name="ratePerQTitle"
+                           Style="{StaticResource smallTitleStyle}">Rate/Quintal:</TextBlock>
+                <TextBlock Name="ratePerQDTKey" Grid.Row="7" Grid.Column="1" 
+                    Text="{Binding Path=RatePerQuintal, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Margin="0"
+                           Name="commissionRateTitle"
+                           Style="{StaticResource smallTitleStyle}">Commission @</TextBlock>
+                <TextBlock Name="commissionRateDTKey" Grid.Row="8" Grid.Column="1" 
+                    Text="{Binding Path=CommissionRate}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0"
+                           Name="commissionAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Commission :</TextBlock>
+                <TextBlock Name="commissionAmountDTKey" Grid.Row="9" Grid.Column="1" 
+                    Text="{Binding Path=CommissionAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Margin="0"
+                           Name="vatRateTitle"
+                           Style="{StaticResource smallTitleStyle}">Vat @</TextBlock>
+                <TextBlock Name="vatRateDTKey" Grid.Row="10" Grid.Column="1" 
+                    Text="{Binding Path=VatRate}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Margin="0"
+                           Name="vatAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Vat :</TextBlock>
+                <TextBlock Name="vatAmountDTKey" Grid.Row="11" Grid.Column="1" 
+                    Text="{Binding Path=VatAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="0"
+                           Name="invoiceAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Invoice Total:</TextBlock>
+                <TextBlock Name="invoiceAmountDTKey" Grid.Row="12" Grid.Column="1" 
+                    Text="{Binding Path=InvoiceAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Margin="0"
+                           Name="lotNoTitle"
+                           Style="{StaticResource smallTitleStyle}">LotNo:</TextBlock>
+                <TextBlock Name="lotNoDTKey" Grid.Row="13" Grid.Column="1" 
+                    Text="{Binding Path=LotNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Margin="0"
+                           Name="pressSerialFromTitle"
+                           Style="{StaticResource smallTitleStyle}">P.S From:</TextBlock>
+                <TextBlock Name="pressSerialFromDTKey" Grid.Row="14" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialFrom}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+                
+                <TextBlock Grid.Row="15" Grid.Column="0" Margin="0"
+                           Name="pressSerialToTitle"
+                           Style="{StaticResource smallTitleStyle}">P.S To:</TextBlock>
+                <TextBlock Name="pressSerialToDTKey" Grid.Row="15" Grid.Column="1" 
+                    Text="{Binding Path=PressSerialTo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="0"
+                           Name="pressMarkTitle"
+                           Style="{StaticResource smallTitleStyle}">Press Mark:</TextBlock>
+                <TextBlock Name="pressMarkDTKey" Grid.Row="16" Grid.Column="1" 
+                    Text="{Binding Path=PressMark}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="17" Grid.Column="0" Margin="0"
+                           Name="grossWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Gross Weight:</TextBlock>
+                <TextBlock Name="grossWeightDTKey" Grid.Row="17" Grid.Column="1" 
+                    Text="{Binding Path=GrossWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="18" Grid.Column="0" Margin="0"
+                           Name="lessTearTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Tear:</TextBlock>
+                <TextBlock Name="lessTearDTKey" Grid.Row="18" Grid.Column="1" 
+                    Text="{Binding Path=LessTear}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="19" Grid.Column="0" Margin="0"
+                           Name="lessSampleTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Sample:</TextBlock>
+                <TextBlock Name="lessSampleDTKey" Grid.Row="19" Grid.Column="1" 
+                    Text="{Binding Path=LessSample}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="20" Grid.Column="0" Margin="0"
+                           Name="lessDamageTitle"
+                           Style="{StaticResource smallTitleStyle}">Less Damage:</TextBlock>
+                <TextBlock Name="lessDamageDTKey" Grid.Row="20" Grid.Column="1" 
+                    Text="{Binding Path=LessDamage}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="21" Grid.Column="0" Margin="0"
+                           Name="netWeightTitle"
+                           Style="{StaticResource smallTitleStyle}">Net Weight:</TextBlock>
+                <TextBlock Name="netWeightDTKey" Grid.Row="21" Grid.Column="1" 
+                    Text="{Binding Path=NetWeight}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="22" Grid.Column="0" Margin="0"
+                           Name="fromTitle"
+                           Style="{StaticResource smallTitleStyle}">From:</TextBlock>
+                <TextBlock Name="fromDTKey" Grid.Row="22" Grid.Column="1" 
+                    Text="{Binding Path=Source}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="23" Grid.Column="0" Margin="0"
+                           Name="toTitle"
+                           Style="{StaticResource smallTitleStyle}">To:</TextBlock>
+                <TextBlock Name="toDTKey" Grid.Row="23" Grid.Column="1" 
+                    Text="{Binding Path=Destination}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="24" Grid.Column="0" Margin="0"
+                           Name="truckNoTitle"
+                           Style="{StaticResource smallTitleStyle}">Truck No:</TextBlock>
+                <TextBlock Name="truckNoDTKey" Grid.Row="24" Grid.Column="1" 
+                    Text="{Binding Path=TruckNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="detailsDebitNoteListingTemplate">
+            <Grid Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0"
+                           Name="debitNoteNoTitle"
+                           Style="{StaticResource smallTitleStyle}">DebitNote:</TextBlock>
+                <TextBlock Name="debitNoteNoDTKey" Grid.Row="0" Grid.Column="1" 
+                    Text="{Binding Path=DebitNoteNo}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0"
+                           Name="debitNoteDateTitle"
+                           Style="{StaticResource smallTitleStyle}">Dated:</TextBlock>
+                <TextBlock Name="debitNoteDateDTKey" Grid.Row="1" Grid.Column="1" 
+                    Text="{Binding Path=DebitNoteDate, StringFormat={}{0:dd-MM-yyyy}}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0"
+                           Name="commissionAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Commission:</TextBlock>
+                <TextBlock Name="commissionAmountDTKey" Grid.Row="2" Grid.Column="1" 
+                    Text="{Binding Path=CommissionAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0"
+                           Name="charityAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Charity:</TextBlock>
+                <TextBlock Name="charityAmountDTKey" Grid.Row="3" Grid.Column="1" 
+                    Text="{Binding Path=CharityAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0"
+                           Name="brokerageAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Brokerage:</TextBlock>
+                <TextBlock Name="brokerageAmountDTKey" Grid.Row="4" Grid.Column="1" 
+                    Text="{Binding Path=BrokerageAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0"
+                           Name="postageTitle"
+                           Style="{StaticResource smallTitleStyle}">Postage:</TextBlock>
+                <TextBlock Name="postageDTKey" Grid.Row="5" Grid.Column="1" 
+                    Text="{Binding Path=Postage}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0"
+                           Name="postageCostTitle"
+                           Style="{StaticResource smallTitleStyle}">PostageCost:</TextBlock>
+                <TextBlock Name="postageCostDTKey" Grid.Row="6" Grid.Column="1" 
+                    Text="{Binding Path=PostageCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Margin="0"
+                           Name="cottonDeliveryExpAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Delivery Exp:</TextBlock>
+                <TextBlock Name="cottonDeliveryExpAmountDTKey" Grid.Row="7" Grid.Column="1" 
+                    Text="{Binding Path=CottonDeliveryExpAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Margin="0"
+                           Name="jafferyActualCostTitle"
+                           Style="{StaticResource smallTitleStyle}">Jaffery:</TextBlock>
+                <TextBlock Name="jafferyActualCostDTKey" Grid.Row="8" Grid.Column="1" 
+                    Text="{Binding Path=JafferyActualCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Margin="0"
+                           Name="markingAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Marking:</TextBlock>
+                <TextBlock Name="markingAmountDTKey" Grid.Row="9" Grid.Column="1" 
+                    Text="{Binding Path=MarkingAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Margin="0"
+                           Name="sampleCuttingTitle"
+                           Style="{StaticResource smallTitleStyle}">Sample-Cutting:</TextBlock>
+                <TextBlock Name="sampleCuttingDTKey" Grid.Row="10" Grid.Column="1" 
+                    Text="{Binding Path=SampleCutting}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="11" Grid.Column="0" Margin="0"
+                           Name="sampleCuttingCostTitle"
+                           Style="{StaticResource smallTitleStyle}">Cutting Cost:</TextBlock>
+                <TextBlock Name="sampleCuttingCostDTKey" Grid.Row="11" Grid.Column="1" 
+                    Text="{Binding Path=SampleCuttingCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="12" Grid.Column="0" Margin="0"
+                           Name="cartagePlatformAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Cartage PF:</TextBlock>
+                <TextBlock Name="cartagePlatformAmountDTKey" Grid.Row="12" Grid.Column="1" 
+                    Text="{Binding Path=CartagePlatformAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="13" Grid.Column="0" Margin="0"
+                           Name="stackingAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Stacking:</TextBlock>
+                <TextBlock Name="stackingAmountDTKey" Grid.Row="13" Grid.Column="1" 
+                    Text="{Binding Path=StackingAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="14" Grid.Column="0" Margin="0"
+                           Name="katlaExpTitle"
+                           Style="{StaticResource smallTitleStyle}">Katla Exp:</TextBlock>
+                <TextBlock Name="katlaExpDTKey" Grid.Row="14" Grid.Column="1" 
+                    Text="{Binding Path=KatlaExp}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="15" Grid.Column="0" Margin="0"
+                           Name="katlaExpAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Katla Amount:</TextBlock>
+                <TextBlock Name="katlaExpAmountDTKey" Grid.Row="15" Grid.Column="1" 
+                    Text="{Binding Path=KatlaExpAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="16" Grid.Column="0" Margin="0"
+                           Name="CartageFactoryAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Cartage Factory:</TextBlock>
+                <TextBlock Name="cartageFactoryAmountDTKey" Grid.Row="16" Grid.Column="1" 
+                    Text="{Binding Path=CartageFactoryAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="17" Grid.Column="0" Margin="0"
+                           Name="stationExpAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Station Exp:</TextBlock>
+                <TextBlock Name="stationExpAmountDTKey" Grid.Row="17" Grid.Column="1" 
+                    Text="{Binding Path=StationExpAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="18" Grid.Column="0" Margin="0"
+                           Name="truckLoadingAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Truck Loading:</TextBlock>
+                <TextBlock Name="truckLoadingAmountDTKey" Grid.Row="18" Grid.Column="1" 
+                    Text="{Binding Path=TruckLoadingAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="19" Grid.Column="0" Margin="0"
+                           Name="bankChargeAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Bank Charge:</TextBlock>
+                <TextBlock Name="bankChargeAmountDTKey" Grid.Row="19" Grid.Column="1" 
+                    Text="{Binding Path=BankChargeAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="20" Grid.Column="0" Margin="0"
+                           Name="godownRentCostTitle"
+                           Style="{StaticResource smallTitleStyle}">Godown Rent:</TextBlock>
+                <TextBlock Name="godownRentCostDTKey" Grid.Row="20" Grid.Column="1" 
+                    Text="{Binding Path=GodownRentCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="21" Grid.Column="0" Margin="0"
+                           Name="stockInsuranceCostTitle"
+                           Style="{StaticResource smallTitleStyle}">Stock Insu:</TextBlock>
+                <TextBlock Name="stockInsuranceCostDTKey" Grid.Row="21" Grid.Column="1" 
+                    Text="{Binding Path=StockInsuranceCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="22" Grid.Column="0" Margin="0"
+                           Name="freightCostTitle"
+                           Style="{StaticResource smallTitleStyle}">Freight Cost:</TextBlock>
+                <TextBlock Name="freightCostDTKey" Grid.Row="22" Grid.Column="1" 
+                    Text="{Binding Path=FreightCost, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="23" Grid.Column="0" Margin="0"
+                           Name="carringChargesAmountTitle"
+                           Style="{StaticResource smallTitleStyle}">Carring Charge:</TextBlock>
+                <TextBlock Name="carringChargesAmountDTKey" Grid.Row="23" Grid.Column="1" 
+                    Text="{Binding Path=CarringChargesAmount, StringFormat={}{0:C}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+                <TextBlock Grid.Row="24" Grid.Column="0" Margin="0"
+                           Name="debitNoteTotalTitle"
+                           Style="{StaticResource smallTitleStyle}">D.N TOTAL:</TextBlock>
+                <TextBlock Name="debitNoteTotalDTKey" Grid.Row="24" Grid.Column="1" 
+                    Text="{Binding Path=DebitNoteTotal, StringFormat={}{0:C0}, ConverterCulture=en-IN}" 
+                    Style="{StaticResource textStyleTextBlock}"/>
+
+            </Grid>
+        </DataTemplate>
+
+
+    </Application.Resources>
+</Application>

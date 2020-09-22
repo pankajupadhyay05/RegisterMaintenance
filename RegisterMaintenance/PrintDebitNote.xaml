@@ -1,0 +1,411 @@
+﻿<Page x:Class="RegisterMaintenance.PrintDebitNote"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1000"
+	Title="PrintDebitNote" >
+
+    <Grid Width="710">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Row 1 Controls-->
+        <Label Name="tinLabel" Margin="0,20,0,0" Content="Tin : 08603407978" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11" />
+        <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" Name="debitNoteLabel" VerticalAlignment="Top" Height="35" FontSize="25">
+            <Underline>Debit-Note</Underline>
+        </TextBlock>
+        <Label Name="originalLabel" Margin="0,45,0,0" Content="Original" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" />
+
+        <Label Name="phoneOfficeLabel" Margin="0,20,0,0" Content="Phone(Office) : 0154-2470535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneHomeLabel" Margin="0,35,0,0" Content="Phone(Home) : 0154-2463814" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneMobileLabel" Margin="0,50,0,0" Content="Mobile No.  : +919414090535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneMobileLabel2" Margin="0,65,0,0" Content="+919414089535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+
+        <Label Name="companyNameLabel" Margin="0,80,0,0" Content="RAM  CHANDER  DINESH  KUMAR       " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="34" />
+        <Label Name="addressLabel" Margin="0,120,0,0" Content="155 New Dhan Mandi, Sri Gangangar(Raj)" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" />
+
+        <!--Row 2 Controls-->
+        <Label Name="debitNoteNoLabel" Margin="0" Content="No:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="debitNoteNoText" Margin="30,0,0,0" Text="{Binding Path=DebitNoteNo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5"/>
+        <Label Name="msLabel" Margin="100,25,0,0" HorizontalAlignment="Left" Content="M/s:" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="buyerText" Margin="160,25,0,0" Text="{Binding Path=Buyer}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="invoiceNoLabel" Margin="0,60,0,0" Content="Bill No:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="invoiceNoText" Margin="47,60,0,0" Text="{Binding Path=InvoiceNo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5"  />
+        <Label Name="invoiceDateLabel" Margin="155,60,0,0" Content="Dated:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="invoiceDateText" Margin="202,60,0,0" Text="{Binding Path=InvoiceDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5"/>
+        <Label Name="balesLabel" Margin="293,60,0,0" Content="Bales:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="balesText" Margin="335,60,0,0" Text="{Binding Path=Bales}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <TextBlock Name="invoiceAmountText" Margin="385,60,0,0" Text="{Binding Path=InvoiceAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="stationLabel" Margin="490,60,0,0" Content="Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="stationText" Margin="545,60,0,0" Text="{Binding Path=Station}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14"  Padding="5"/>
+        <Label Name="pressSerialFromLabel" Margin="0,85,0,0" Content="S.No:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="pressSerialFromText" Margin="38,85,0,0" Text="{Binding Path=PressSerialFrom}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="pressSerialToLabel" Margin="90,85,0,0" Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="pressSerialToText" Margin="115,85,0,0" Text="{Binding Path=PressSerialTo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="pressMarkLabel" Margin="168,85,0,0" Content="Press Mark:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="pressMarkText" Margin="245,85,0,0" Text="{Binding Path=PressMark}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="lotNoLabel" Margin="330,85,0,0" Content="LotNo:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="lotNoText" Margin="378,85,0,0" Text="{Binding Path=LotNo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="dueDateLabel" Margin="440,85,0,0" Content="Due Dt:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="dueDateText" Margin="490,85,0,0" Text="{Binding Path=DueDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="despatchLabel" Margin="570,85,0,0" Content="Desp:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="despatchText" Margin="610,85,0,0" Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+
+        <Label Name="blank0Label0" Margin="0" Content="_ _ _ _ _ _ _ _ _ " HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label1" Margin="140,25,0,0" Content="________________________________________________________________________________________________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label2" Margin="43,60,0,0" Content="_____________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label3" Margin="197,60,0,0" Content="________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label4" Margin="330,60,0,0" Content="_____________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label5" Margin="404,60,0,0" Content="____________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label6" Margin="0,60,05,0" Content="_____________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label7" Margin="32,85,0,0" Content="__________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label8" Margin="110,85,0,0" Content="__________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label9" Margin="240,85,0,0" Content="_____________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label10" Margin="371,85,0,0" Content="______________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label11" Margin="489,85,0,0" Content="__________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="blank0Label12" Margin="0,85,05,0" Content="______________________________" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+
+
+
+        <Label Name="debitNoteDateLabel" Margin="0,0,85,0" Content="Dated:" HorizontalAlignment="right" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <TextBlock Name="debitNoteDateText" Margin="0,0,5,0" Text="{Binding Path=DebitNoteDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <!--Row 3 Controls-->
+        
+        <!--Row 4 Controls-->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="540"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Center" Grid.Column="0" Margin="0,5,0,0" Name="particularsLabel" VerticalAlignment="Top" Height="25" FontSize="20" >
+                <TextBlock.Text>Particulars</TextBlock.Text>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Name="amountLabel" VerticalAlignment="Top" Height="25" FontSize="20" Grid.Column="1">
+                <Bold>Amount</Bold>
+            </TextBlock>
+            <Label Name="oneLabel" Margin="0,35,0,0" Content="1." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="twoLabel" Margin="0,55,0,0" Content="2." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="threeLabel" Margin="0,75,0,0" Content="3." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="fourLabel" Margin="0,95,0,0" Content="4." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="fiveLabel" Margin="0,115,0,0" Content="5." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="sixLabel" Margin="0,135,0,0" Content="6." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="sevenLabel" Margin="0,155,0,0" Content="7." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="eightLabel" Margin="0,175,0,0" Content="8." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="nineLabel" Margin="0,195,0,0" Content="9." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="tenLabel" Margin="0,215,0,0" Content="10." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="elevenLabel" Margin="0,235,0,0" Content="11." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="twelveLabel" Margin="0,255,0,0" Content="12." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="thirteenLabel" Margin="0,275,0,0" Content="13." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="fourteenLabel" Margin="0,295,0,0" Content="14." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="fifteenLabel" Margin="0,315,0,0" Content="15." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="sixteenLabel" Margin="0,335,0,0" Content="16." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="seventeenLabel" Margin="0,355,0,0" Content="17." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="eighteenLabel" Margin="0,375,0,0" Content="18." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="nineteenLabel" Margin="0,395,0,0" Content="19." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="totalLabel" Margin="490,460,0,0" Content="Total" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+
+            <Label Name="commissionLabel" Margin="50,35,0,0" Content="Commission on:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="commissionText" Margin="190,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=AmountAndVat, StringFormat={}{0:C0}, ConverterCulture=en-IN}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=commissionRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="charityLabel" Margin="50,55,0,0" Content="Charity on:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="charityText" Margin="190,55,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" >
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=AmountAndVat, StringFormat={}{0:C0}, ConverterCulture=en-IN}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=charityRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="brokerageLabel" Margin="50,75,0,0" Content="Bokerage on:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="brokerageText" Margin="190,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" >
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=AmountAndVat, StringFormat={}{0:C0}, ConverterCulture=en-IN}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=brokerageRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="postageLabel" Margin="50,95,0,0" Content="Postage:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="postageText" Margin="190,95,0,0" Text="{Binding Path=Postage}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="cottonDeliveryExpLabel" Margin="50,115,0,0" Content="Cotton Delivery Exp:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="cottonDeliveryExpText" Margin="220,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=cottonDeliveryExpRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="jafferyActualLabel" Margin="50,135,0,0" Content="Jaffery Actual:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="jafferyActualText" Margin="190,135,0,0" Text="{Binding Path=JafferyActual}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            <Label Name="markingLabel" Margin="50,155,0,0" Content="Marking:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="markingText" Margin="190,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14"  Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=markingRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="sampleCuttingLabel" Margin="50,175,0,0" Content="Sample Cutting:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="sampleCuttingText" Margin="190,175,0,0" Text="{Binding Path=SampleCutting}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="cartagePlatformLabel" Margin="50,195,0,0" Content="Cartage Platform to Godown:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="cartagePlatformText" Margin="270,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=cartagePlatformRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="stackingLabel" Margin="50,215,0,0" Content="Stacking in Godown/Factory:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="stackingText" Margin="270,215,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14"  Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=stackingRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="katlaExpLabel" Margin="50,235,0,0" Content="Katla Exp:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="katlaExpText" Margin="160,235,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=katlaExpRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="cartageFactoryLabel" Margin="50,255,0,0" Content="Cartage from Factory/Godown/Station:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="cartageFactoryText" Margin="310,255,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=cartageFactoryRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="stationExpLabel" Margin="50,275,0,0" Content="Station Exp:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="stationExpText" Margin="190,275,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=stationExpRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="truckLoadingLabel" Margin="50,295,0,0" Content="Wagon/Truck Loading:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="truckLoadingText" Margin="220,295,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="{Binding Path=Bales}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=truckLoadingRateText, Path=Text}" Value="">
+                            <Setter Property="Text" Value=""/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Label Name="bankChargeLabel" Margin="50,315,0,0" Content="Bank Charge / RTGS :" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="bankChargeCostText" Margin="240,315,0,0" Text="{Binding Path=BankChargeCost}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            
+            <Label Name="godownRentFromLabel" Margin="50,335,0,0" Content="Godown Rent From:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="godownRentFromText" Margin="200,335,0,0" Text="{Binding Path=GodownRentFrom, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            <Label Name="godownRentToLabel" Margin="320,335,0,0" Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="godownRentToText" Margin="365,335,0,0" Text="{Binding Path=GodownRentTo, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            <Label Name="stockInsuranceLabel" Margin="50,355,0,0" Content="Stock Insurance:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="stockInsuranceText" Margin="190,355,0,0" Text="{Binding Path=StockInsurance}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="freightFromLabel" Margin="50,375,0,0" Content="Freight From:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="freightFromText" Margin="190,375,0,0" Text="{Binding Path=FreightFrom}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="freightToLabel" Margin="320,375,0,0" Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="freightToText" Margin="365,375,0,0" Text="{Binding Path=FreightTo}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="carringChargesOnLabel" Margin="50,395,0,0" Content="Carring Charges on:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="carringChargesOnText" Margin="190,395,0,0" Text="{Binding Path=CarringChargesOn}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            <Label Name="carringChargesFromLabel" Margin="300,395,0,0" Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="carringChargesFromText" Margin="345,395,0,0" Text="{Binding Path=CarringChargesFrom, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5" />
+            <Label Name="carringChargesToLabel" Margin="420,395,0,0" Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="carringChargesToText" Margin="450,395,0,0" Text="{Binding Path=CarringChargesTo, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14"  Padding="5"/>
+            <Label Name="carringChargesForLabel" Margin="50,415,0,0" Content="For:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="carringChargesForText" Margin="100,415,0,0" Text="{Binding Path=CarringChargesFor}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <Label Name="carringChargesRateLabel" Margin="150,415,0,0" Content="days @" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <TextBlock Name="carringChargesRateText" Margin="220,415,0,0" Text="{Binding Path=CarringChargesRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            
+
+
+            <Label Name="blankLabel1" Margin="0,35,195,0" Content="______________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel2" Margin="0,55,195,0" Content="________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel3" Margin="0,75,195,0" Content="___________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel4" Margin="0,95,15,0" Content="____________________________________________________________________________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel5" Margin="0,115,195,0" Content="_____________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel6" Margin="0,135,15,0" Content="_________________________________________________________________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel7" Margin="0,155,195,0" Content="______________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel8" Margin="0,175,15,0" Content="____________________________________________________________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel9" Margin="0,195,195,0" Content="_________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel10" Margin="0,215,195,0" Content="_________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel11" Margin="0,235,195,0" Content="__________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel12" Margin="0,255,195,0" Content="_____________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel13" Margin="0,275,195,0" Content="______________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel14" Margin="0,295,195,0" Content="_______________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel15" Margin="0,315,15,0" Content="_______________________________________________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel16" Margin="0,335,215,0" Content="______________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel17" Margin="0,335,15,0" Content="__________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel18" Margin="0,355,15,0" Content="___________________________________________________________________________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel19" Margin="0,375,215,0" Content="___________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel20" Margin="0,375,15,0" Content="__________________________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel21" Margin="0,395,235,0" Content="________________________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel22" Margin="0,395,115,0" Content="_________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel23" Margin="0,395,15,0" Content="________________________" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel24" Margin="80,415,10,0" Content="_____________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blankLabel25" Margin="200,415,10,0" Content="_____________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            
+
+
+
+
+            <Label Name="atTheRateLabel1" Margin="340,35,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel2" Margin="340,55,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel3" Margin="340,75,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel4" Margin="340,115,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel5" Margin="340,155,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel6" Margin="340,195,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel7" Margin="340,215,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel8" Margin="340,235,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel9" Margin="340,255,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel10" Margin="340,275,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="atTheRateLabel11" Margin="340,295,0,0" Content="@" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            
+            <TextBlock Name="commissionRateText" Margin="400,35,0,0" Text="{Binding Path=CommissionRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="charityRateText" Margin="400,55,0,0" Text="{Binding Path=CharityRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="brokerageRateText" Margin="400,75,0,0" Text="{Binding Path=BrokerageRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="cottonDeliveryExpRateText" Margin="400,115,0,0" Text="{Binding Path=CottonDeliveryExpRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="markingRateText" Margin="400,155,0,0" Text="{Binding Path=MarkingRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="cartagePlatformRateText" Margin="400,195,0,0" Text="{Binding Path=CartagePlatformRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="stackingRateText" Margin="400,215,0,0" Text="{Binding Path=StackingRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="katlaExpRateText" Margin="400,235,0,0" Text="{Binding Path=KatlaExpRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="cartageFactoryRateText" Margin="400,255,0,0" Text="{Binding Path=CartageFactoryRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="stationExpRateText" Margin="400,275,0,0" Text="{Binding Path=StationExpRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            <TextBlock Name="truckLoadingRateText" Margin="400,295,0,0" Text="{Binding Path=TruckLoadingRate}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Padding="5"/>
+            
+
+            <Label Name="blank2Label1" Margin="360,35,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label2" Margin="360,55,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label3" Margin="360,75,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label4" Margin="360,115,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label5" Margin="360,155,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label6" Margin="360,195,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label7" Margin="360,215,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label8" Margin="360,235,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label9" Margin="360,255,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label10" Margin="360,275,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="blank2Label11" Margin="360,295,10,0" Content="_______________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            
+
+            <Label Name="perLabel1" Margin="480,35,0,0" Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel2" Margin="480,55,0,0" Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel3" Margin="480,75,0,0" Content="%" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel4" Margin="480,115,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel5" Margin="480,155,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel6" Margin="480,195,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel7" Margin="480,215,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel8" Margin="480,235,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel9" Margin="480,255,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel10" Margin="480,275,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            <Label Name="perLabel11" Margin="480,295,0,0" Content="P.Bale" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" />
+            
+            <TextBlock Name="commissionAmountText" Margin="40,35,0,0" Text="{Binding Path=CommissionAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="charityAmountText" Margin="40,55,0,0" Text="{Binding Path=CharityAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="brokerageAmountText" Margin="40,75,0,0" Text="{Binding Path=BrokerageAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="postageCostText" Margin="40,95,0,0" Text="{Binding Path=PostageCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="cottonDeliveryExpAmountText" Margin="40,115,0,0" Text="{Binding Path=CottonDeliveryExpAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="jafferyActualCostText" Margin="40,135,0,0" Text="{Binding Path=JafferyActualCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="markingAmountText" Margin="40,155,0,0" Text="{Binding Path=MarkingAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="sampleCuttingCostText" Margin="40,175,0,0" Text="{Binding Path=SampleCuttingCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="cartagePlatformAmountText" Margin="40,195,0,0" Text="{Binding Path=CartagePlatformAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="stackingAmountText" Margin="40,215,0,0" Text="{Binding Path=StackingAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="katlaExpAmountText" Margin="40,235,0,0" Text="{Binding Path=KatlaExpAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="cartageFactoryAmountText" Margin="40,255,0,0" Text="{Binding Path=CartageFactoryAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="stationExpAmountText" Margin="40,275,0,0" Text="{Binding Path=StationExpAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="truckLoadingAmountText" Margin="40,295,0,0" Text="{Binding Path=TruckLoadingAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="bankChargeAmountText" Margin="40,315,0,0" Text="{Binding Path=BankChargeAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="godownRentAmountText" Margin="40,335,0,0" Text="{Binding Path=GodownRentCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="stockInsuranceCostText" Margin="40,355,0,0" Text="{Binding Path=StockInsuranceCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="freightCostText" Margin="40,375,0,0" Text="{Binding Path=FreightCost, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+            <TextBlock Name="carringChargesAmountText" Margin="40,415,0,0" Text="{Binding Path=CarringChargesAmount, StringFormat={}{0:C0}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+
+            <TextBlock Name="debitNoteTotalText" Margin="20,460,0,0" Text="{Binding Path=DebitNoteTotal, StringFormat={}{0:C0}.00, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" FontSize="14" Padding="5"/>
+
+
+
+ 
+            <Rectangle HorizontalAlignment="Stretch" Margin="0" Name="rectangle2" Stroke="Black" VerticalAlignment="Stretch" />
+            <Rectangle HorizontalAlignment="Stretch" Margin="0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Grid.Column="0" Grid.ColumnSpan="2" Height="35" />
+            <Rectangle HorizontalAlignment="Stretch" Margin="0" Name="rectangle4" Stroke="Black" VerticalAlignment="Bottom" Grid.Column="1" Height="40"/>
+           
+        </Grid>
+        <Label Name="forRDLabel" Margin="0,10,15,0" Content="For Ram Chander Dinesh Kumar" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="4" FontWeight="Bold"/>
+        <Label Name="managerLabel" Margin="0,55,15,0" Content="Manager" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="4" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Name="diclaimerLabel" Margin="20,0,0,110" VerticalAlignment="Bottom" Height="Auto" FontSize="16" Grid.Row="5" Padding="5" FontWeight="Bold">
+            <Underline>NOTE:</Underline>
+        </TextBlock>
+        <Label Name="point1Label" Margin="20,0,0,90" Content="1) We are only your service agent" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="5" FontSize="12" />
+        <Label Name="point2Label" Margin="20,0,0,70" Content="2) We are not liable for any type of economic loss" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="5" FontSize="12" />
+        <Label Name="point3Label" Margin="20,0,0,50" Content="3) Our full co-operation will always be with you" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="5" FontSize="12" />
+        <Label Name="diclaimer2Label" Margin="0,0,0,0" Content="------------------------155 New Dhan Mandi, Sri Ganganagar, Rajasthan, Pin-Code : 335001, email - rd.sgnr@gmail.com------------------------" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="5" FontSize="11" FontStretch="UltraExpanded" />
+        <Rectangle HorizontalAlignment="Stretch" Margin="0" Name="rectangle1" Stroke="Black" VerticalAlignment="Stretch" Grid.Row="2" Grid.RowSpan="2" />
+    </Grid>
+</Page>

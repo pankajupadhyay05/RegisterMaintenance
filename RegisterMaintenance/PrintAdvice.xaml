@@ -1,0 +1,96 @@
+﻿<Page x:Class="RegisterMaintenance.PrintAdvice"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="0" d:DesignWidth="0"
+	Title="PrintAdvice">
+
+    <Grid Width="710">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Row 1 Controls-->
+        <Label Name="tinLabel" Margin="0,20,0,0" Content="Tin : 08603407978" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11" />
+        <Image HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,1,0,0" Stretch="None" >
+            <Image.Source>
+                <BitmapImage UriSource="Theme/Images/cottonLogo.png" />
+            </Image.Source>
+        </Image>
+        <Label Name="phoneOfficeLabel" Margin="0,20,0,0" Content="Phone(Office) : 0154-2470535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneHomeLabel" Margin="0,35,0,0" Content="Phone(Home) : 0154-2463814" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneMobileLabel" Margin="0,50,0,0" Content="Mobile No.  : +919414090535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+        <Label Name="phoneMobileLabel2" Margin="0,65,0,0" Content="+919414089535" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="11" />
+
+        <Label Name="companyNameLabel" Margin="0,80,0,0" Content="RAM  CHANDER  DINESH  KUMAR" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" />
+        <Label Name="addressLabel" Margin="0,110,0,0" Content="155 New Dhan Mandi, Sri Gangangar(Raj)  " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12" />
+        <!--Row 2 Controls-->
+        <TextBlock HorizontalAlignment="Center" Name="purchaseAdviceLabel" Margin="0,20,0,0" VerticalAlignment="Top" Height="30" FontSize="20" Grid.Row="1">
+            <Underline>Purchase Advice</Underline>
+        </TextBlock>
+        <Label Name="transactionNumber" Margin="20,60,0,0" Content="Transaction no:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Grid.Row="1" />
+        <TextBlock Name="transactionNumberText" Margin="130,60,0,0" Text="{Binding Path=Serial}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" FontWeight="Bold" />
+        <Label Name="toLabel" Margin="20,90,0,0" Content="To," HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="1" />
+        <Label Name="msLabel" Margin="40,120,0,0" Content="M/s" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="1" />
+        <TextBlock Name="buyerText" Margin="80,120,0,0" Text="{Binding Path=Buyer}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" Padding="5" />
+        <Label Name="blank0Label1" Margin="70,120,0,0" Content="________________________________________________________________________________________________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+        <Label Name="subjectLabel" Margin="40,150,0,0" Content="Subject : BARGAIN INFORMATION" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="1" />
+        <Label Name="blank0Label2" Margin="95,150,0,0" Content="______________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="14" />
+
+        <!--Row 3 Controls-->
+        <Label Name="dearSirLabel" Margin="20,20,0,0" Content="Dear Sir," HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="2" />
+        <Label Name="msg1Label" Margin="80,40,0,0" Content="Today, we made a purchase of " HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="2" />
+        <TextBlock Name="balesText" Margin="275,40,0,0" Text="{Binding Path=Bales}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="blank0Label3" Margin="270,40,0,0" Content="_______________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="msg2Label" Margin="320,40,0,0" Content="Bales of cotton on your behalf @" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Grid.Row="2" />
+        <TextBlock Name="ratePerMoundText" Margin="530,40,0,0" Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="blank0Label4" Margin="525,40,0,0" Content="______________________________ Spot" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+
+        <Label Name="purDateLabel" Margin="80,60,100,0" Content="Purchase Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <TextBlock Name="purDateText" Margin="180,60,0,0" Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="qualityLabel" Margin="80,80,100,0" Content="Quality:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <TextBlock Name="qualityText" Margin="180,80,0,0" Text="{Binding Path=Quality}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="stationLabel" Margin="80,100,0,0" Content="Station:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <TextBlock Name="stationText" Margin="180,100,0,0" Text="{Binding Path=Station}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="conditionLabel" Margin="80,120,0,0" Content="Condition:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <TextBlock Name="conditionText" Margin="180,120,0,0" Text="{Binding Path=Condition}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="sellerLabel" Margin="80,140,0,0" Content="Seller:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <TextBlock Name="sellerText" Margin="180,140,0,0" Text="{Binding Path=Seller}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" Padding="5" />
+        <Label Name="kindlyNoteLabel" Margin="80,180,0,0" Content="So please Note." HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+
+        <Label Name="blank0Labe99" Margin="175,60,0,0" Content="___________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="blank0Label5" Margin="175,80,0,0" Content="___________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="blank0Label6" Margin="175,100,0,0" Content="___________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="blank0Label7" Margin="175,120,0,0" Content="___________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="blank0Label8" Margin="175,140,0,0" Content="___________________________________________________________" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+
+
+
+        <Label Name="regardsLabel" Margin="20,250,0,0" Content="With Warm Regards," HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="managerLabel" Margin="20,300,0,0" Content="Manager," HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+        <Label Name="rdLabel" Margin="20,320,0,0" Content="RAM CHANGER DINESH KUMAR" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="14" />
+
+        <TextBlock HorizontalAlignment="Left" Name="diclaimerLabel" Margin="20,0,0,110" VerticalAlignment="Bottom" Height="Auto" FontSize="16" Grid.Row="3" Padding="5" FontWeight="Bold">
+            <Underline>NOTE:</Underline>
+        </TextBlock>
+        <Label Name="point1Label" Margin="20,0,0,90" Content="1) We are only your service agent" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" FontSize="12" />
+        <Label Name="point2Label" Margin="20,0,0,70" Content="2) We are not liable for any type of economic loss" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" FontSize="12" />
+        <Label Name="point3Label" Margin="20,0,0,50" Content="3) Our full co-operation will always be with you" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" FontSize="12" />
+        <Label Name="diclaimer2Label" Margin="0,0,0,0" Content="------------------------155 New Dhan Mandi, Sri Ganganagar, Rajasthan, Pin-Code : 335001, email - rd.sgnr@gmail.com------------------------" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3" FontSize="11" FontStretch="UltraExpanded" />
+
+
+
+
+
+
+
+
+        <!--Row 4 Controls-->
+
+    </Grid>
+</Page>

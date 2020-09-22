@@ -1,0 +1,98 @@
+﻿<Page x:Class="RegisterMaintenance.PrintDetail"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="900"
+	Title="PrintDetail">
+
+    <Grid Width="710">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Row 1 Controls-->
+        <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" Name="debitNoteLabel" VerticalAlignment="Top" Height="Auto" FontSize="20">
+            <TextBlock>Ram Chander Dinesh Kumar</TextBlock>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Center" Margin="0,45,0,0" Name="addressLabel" VerticalAlignment="Top" Height="Auto" FontSize="12">
+            <Underline>Ram Chander Dinesh Kumar</Underline>
+        </TextBlock>
+        <Label Name="companyNameLabel" Margin="0,65,0,0" Content="TRANSACTION" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" />
+        <!--Row 2 Controls-->
+        <Label Content="S.No:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,20,0,0" Name="serialLabel" VerticalAlignment="Top" />
+        <Label Content="Date:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,50,0,10" Name="dateLabel" VerticalAlignment="Top" />
+
+        <TextBlock Name="serialNoText" Margin="50,20,0,0" Text="{Binding Path=Serial}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="12" Padding="5" />
+        <TextBlock Name="transactionDateText" Margin="50,50,0,0" Text="{Binding Path=Date, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" FontSize="12" Padding="5" />
+
+        <!--Row 3 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="generalLabel" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>General</Underline>
+        </TextBlock>
+
+        <Label Content="Seller Party:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="sellerLabel" VerticalAlignment="Top" />
+        <Label Content="Staion:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,65,0,0" Name="stationLabel" VerticalAlignment="Top" />
+        <Label Content="Bales:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,90,0,0" Name="balesLabel" VerticalAlignment="Top" />
+        <Label Content="Quality:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,115,0,0" Name="qualityLabel" VerticalAlignment="Top" />
+        <Label Content="Rate/Mound:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,140,0,0" Name="ratePerMLabel" VerticalAlignment="Top" />
+        <Label Content="Broker Name:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,165,0,0" Name="brokerLabel" VerticalAlignment="Top" />
+        <Label Content="Brokerage Paid:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="brokeragePaidLabel" VerticalAlignment="Top" />
+        <Label Content="Buyer:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,215,0,0" Name="buyerLabel" VerticalAlignment="Top" />
+        <Label Content="Condition:" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="10,240,0,0" Name="conditionLabel" VerticalAlignment="Top" />
+
+        <TextBlock Name="sellerText" Margin="140,40,0,0" Text="{Binding Path=Seller}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="stationText" Margin="140,65,0,0" Text="{Binding Path=Station}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="balesText" Margin="140,90,0,0" Text="{Binding Path=Bales}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="qualityText" Margin="140,115,0,0" Text="{Binding Path=Quality}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="ratePerMText" Margin="140,140,0,0" Text="{Binding Path=RatePerMound, StringFormat={}{0:C}, ConverterCulture=en-IN}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="brokerText" Margin="140,165,0,0" Text="{Binding Path=Broker}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="brokeragePaidText" Margin="140,190,0,0" Text="{Binding Path=BrokeragePaid}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="buyerText" Margin="140,215,0,0" Text="{Binding Path=Buyer}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="conditionText" Margin="140,240,0,0" Text="{Binding Path=Condition}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,270,0,0" Name="pressRelatedLabel" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>Press Related</Underline>
+        </TextBlock>
+
+        <Label Content="Press Date:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,300,0,0" Name="pressDateLabel" VerticalAlignment="Top" />
+        <Label Content="Press Serial From:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,325,0,0" Name="pressSerialFromLabel" VerticalAlignment="Top" />
+        <Label Content="Press Serial To:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,350,0,0" Name="pressSerialToLabel" VerticalAlignment="Top" />
+        <Label Content="Press Mark:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,375,0,0" Name="pressMarkLabel" VerticalAlignment="Top" />
+        <Label Content="Gross Weight:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,400,0,0" Name="grossWeightLabel" VerticalAlignment="Top" />
+        <Label Content="Less Tear:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,425,0,0" Name="lessTearLabel" VerticalAlignment="Top" />
+        <Label Content="Less Sample:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,450,0,0" Name="lessSampleLabel" VerticalAlignment="Top" />
+        <Label Content="Less Damage:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,475,0,0" Name="lessDamageLabel" VerticalAlignment="Top" />
+        <Label Content="Despatch Date:" Grid.Row="2" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,500,0,0" Name="despatchDateLabel" VerticalAlignment="Top" />
+
+        <TextBlock Name="pressDateText" Margin="140,300,0,0" Text="{Binding Path=PressDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="pressSerialFromText" Margin="140,325,0,0" Text="{Binding Path=PressSerialFrom}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="pressSerialToText" Margin="140,350,0,0" Text="{Binding Path=PressSerialTo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="pressMarkText" Margin="140,375,0,0" Text="{Binding Path=PressMark}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="grossWeightText" Margin="140,400,0,0" Text="{Binding Path=GrossWeight}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="lessTearText" Margin="140,425,0,0" Text="{Binding Path=LessTear}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="lessSampleText" Margin="140,450,0,0" Text="{Binding Path=LessSample}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="lessDamageText" Margin="140,475,0,0" Text="{Binding Path=LessDamage}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="despatchDateText" Margin="140,500,0,0" Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+
+
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,530,0,0" Name="othersLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="#FF333333">
+            <Underline>Other</Underline>
+        </TextBlock>
+
+        <Label Content="GR No:" Grid.Row="2" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,560,0,0" Name="grNoLabel" VerticalAlignment="Top" />
+        <Label Content="Lot No:" Grid.Row="2" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,585,0,0" Name="lotNoLabel" VerticalAlignment="Top" />
+        <Label Content="Payment Date:" Grid.Row="2" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,610,0,0" Name="paymenDateLabel" VerticalAlignment="Top" />
+        <Label Content="Due Date:" Grid.Row="2" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,635,0,0" Name="dueDateLabel" VerticalAlignment="Top" />
+
+        <TextBlock Name="grNoText" Margin="140,560,0,0" Text="{Binding Path=GRNo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="lotNoText" Margin="140,585,0,0" Text="{Binding Path=LotNo}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="paymentDateText" Margin="140,610,0,0" Text="{Binding Path=PaymentDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <TextBlock Name="dueDateText" Margin="140,635,0,0" Text="{Binding Path=DespatchDate, StringFormat={}{0:dd-MM-yyyy}}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" FontSize="12" Padding="5" />
+        <!--Row 4 Controls-->
+        
+    </Grid>
+</Page>

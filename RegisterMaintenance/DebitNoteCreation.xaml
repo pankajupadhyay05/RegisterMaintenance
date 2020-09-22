@@ -1,0 +1,425 @@
+﻿<Page x:Class="RegisterMaintenance.DebitNoteCreation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:rm="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+      xmlns:registerMaintenance="clr-namespace:RegisterMaintenance.DAL"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+	Title="DebitNoteCreation">
+
+    <Page.Resources>
+        <registerMaintenance:DecimalNullFromStringConverter x:Key="DecimalNullFromStringConverter" />
+        <Style x:Key="errorStyle" TargetType="Control">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--Row 1 Controls-->
+        <Label Style="{StaticResource headerLabelStyle}" Width="Auto" Content="CREATE >> Debit-Note" Height="28" HorizontalAlignment="Stretch" Margin="0" Name="createTransactionLabel" HorizontalContentAlignment="Left" VerticalAlignment="Stretch" Grid.ColumnSpan="3" />
+
+        <!--Row 2 Controls-->
+        <Label Content="DebitNote No:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,20,0,0" Name="debitNoteNoLabel" VerticalAlignment="Top" />
+        <Label Content="Date:" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="10,50,0,10" Name="debitNoteDateLabel" VerticalAlignment="Top" />
+
+        <TextBox Grid.Row="1" HorizontalAlignment="left" Margin="100,20,0,20" Name="debitNoteNoText" VerticalAlignment="Top" Width="120" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding Path="DebitNoteNo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="100,50,0,10" Name="debitNoteDateText" VerticalAlignment="Top" Width="120" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="DebitNoteDate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <Button Content="Save" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="saveButton" VerticalAlignment="Stretch" Margin="0,0,80,0" Width="75" Click="saveButton_Click" />
+        <Button Content="Cancel" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Name="cancelButton" VerticalAlignment="Stretch" Margin="0" Width="75" Click="cancelButton_Click" />
+
+        <!--Row 3 Controls-->
+
+        <!--Row 3 Column 1 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="generalLabel" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" Foreground="#FF3B5998">
+            <Underline>Particulars-I</Underline>
+        </TextBlock>
+
+        <Label Content="Amount for C/B/C" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="amountAndVatLabel" VerticalAlignment="Top" />
+        <Label Content="Commission @" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="commissionRateLabel" VerticalAlignment="Top" />
+        <Label Content="Charity @" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="charityRateLabel" VerticalAlignment="Top" />
+        <Label Content="Brokerage @" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="brokerageRateLabel" VerticalAlignment="Top" />
+        <Label Content="Postage:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,160,0,0" Name="postageLabel" VerticalAlignment="Top" />
+        <Label Content="Postage Cost:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="postageCostLabel" VerticalAlignment="Top" />
+        <Label Content="Cotton Deliver Exp @" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,220,0,0" Name="cottonDeliveryExpRateLabel" VerticalAlignment="Top" />
+        <Label Content="Jaffery Actual:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,250,0,0" Name="jafferyActualLabel" VerticalAlignment="Top" />
+        <Label Content="Jaffery Actual Cost:" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,280,0,0" Name="jafferyActualCostLabel" VerticalAlignment="Top" />
+        <Label Content="Marking @" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="10,310,0,0" Name="markingRateLabel" VerticalAlignment="Top" />
+
+        <Label Content="%" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="250,70,0,0" Name="percentLabel1" VerticalAlignment="Top" />
+        <Label Content="%" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="250,100,0,0" Name="percentLabel2" VerticalAlignment="Top" />
+        <Label Content="%" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="250,130,0,0" Name="percentLabel3" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="250,220,0,0" Name="perBaleLabel1" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="250,310,0,0" Name="perBaleLabel2" VerticalAlignment="Top" />
+
+        <TextBox Grid.Row="2" HorizontalAlignment="left" Margin="140,40,0,0" Name="amountAndVatText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="AmountAndVat">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" HorizontalAlignment="left" Margin="140,70,0,0" Name="commissionRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CommissionRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" HorizontalAlignment="left" Margin="140,100,0,0" Name="charityRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CharityRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Row="2" HorizontalAlignment="Left" Margin="140,130,0,0" Name="brokerageRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="BrokerageRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" HorizontalAlignment="left" Margin="140,160,0,0" Name="postageText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="Postage">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Row="2" HorizontalAlignment="Left" Margin="140,190,40,0" Name="postageCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="PostageCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="140,220,0,0" Name="cottonDeliveryExpText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CottonDeliveryExpRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="140,250,0,0" Name="jafferyActualText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="JafferyActual">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="140,280,0,0" Name="jafferyActualCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="JafferyActualCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Style="{StaticResource errorStyle}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="140,310,0,0" Name="markingRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="MarkingRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--Row 3 Column 2 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="pressRelatedLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" FontWeight="Bold" Foreground="#FF3B5998">
+            <Underline>Particulars-II</Underline>
+        </TextBlock>
+
+        <Label Content="Sample Cutting:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="sampleCuttingLabel" VerticalAlignment="Top" />
+        <Label Content="Sample Cutting Cost:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="sampleCuttingCostLabel" VerticalAlignment="Top" />
+        <Label Content="Cartage Platform to Godown @" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="cartagePlatformRateLabel" VerticalAlignment="Top" />
+        <Label Content="Stacking in Godown/Factory @" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="stackingRateLabel" VerticalAlignment="Top" />
+        <Label Content="Katla Exp:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,160,0,0" Name="katlaExpLabel" VerticalAlignment="Top" />
+        <Label Content="Katla Exp @" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="katlaExpRateLabel" VerticalAlignment="Top" />
+        <Label Content="Cartage From Fact/Station @" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,220,0,0" Name="cartageFactoryRateLabel" VerticalAlignment="Top" />
+        <Label Content="Station Exp @:" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,250,0,0" Name="stationExpRateLabel" VerticalAlignment="Top" />
+        <Label Content="Wagon/Truck Loading @" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,280,0,0" Name="truckLoadingRateLabel" VerticalAlignment="Top" />
+        <Label Content="Bank Charge / RTGS" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment="Left" Margin="10,310,0,0" Name="bankChargeCostLabel" VerticalAlignment="Top" />
+
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,100,0,0" Name="perBaleLabel3" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,130,0,0" Name="perBaleLabel4" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,190,0,0" Name="perBaleLabel5" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,220,0,0" Name="perBaleLabel6" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,250,0,0" Name="perBaleLabel7" VerticalAlignment="Top" />
+        <Label Content="P.Bale" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,280,0,0" Name="perBaleLabel8" VerticalAlignment="Top" />
+        <Label Content="" Grid.Column="1" Grid.Row="3" Height="25" HorizontalAlignment="Left" Margin="290,310,0,0" Name="percentLabel4" VerticalAlignment="Top" />
+
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="left" Margin="190,40,0,0" Name="sampleCuttingText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="SampleCutting">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox  Style="{StaticResource errorStyle}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="left" Margin="190,70,0,0" Name="sampleCuttingCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="SampleCuttingCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="190,100,0,0" Name="pressSerialToText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CartagePlatformRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.RowSpan="1" HorizontalAlignment="Left" Margin="190,130,0,0" Name="stackingRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="StackingRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,160,0,0" Name="katlaExpText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="KatlaExp">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,190,0,0" Name="katlaExpRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="KatlaExpRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,220,0,0" Name="cartageFactoryRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CartageFactoryRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,250,0,0" Name="stationExpText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="StationExpRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,280,0,0" Name="truckLoadingRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="TruckLoadingRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="190,310,0,0" Name="bankChargeCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="BankChargeCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <!--Row 3 Column 3 Controls-->
+        <TextBlock Height="23" HorizontalAlignment="Center" Margin="10,10,0,0" Name="othersLabel" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="#FF3B5998">
+            <Underline>Particulars-III</Underline>
+        </TextBlock>
+
+        <Label Content="Godown Rent From:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" Name="godownRentFromLabel" VerticalAlignment="Top" />
+        <Label Content="Godown Rent To:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" Name="godownRentToLabel" VerticalAlignment="Top" />
+        <Label Content="Godown Rent Cost:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" Name="godownRentCostLabel" VerticalAlignment="Top" />
+        <Label Content="Stock Insurance:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" Name="stockInsuranceLabel" VerticalAlignment="Top" />
+        <Label Content="Stock Insurance Cost:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,160,0,0" Name="stockInsuranceCostLabel" VerticalAlignment="Top" />
+        <Label Content="Freight From:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,190,0,0" Name="freightFromLabel" VerticalAlignment="Top" />
+        <Label Content="Freight To:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,220,0,0" Name="freightToLabel" VerticalAlignment="Top" />
+        <Label Content="Freight Cost:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,250,0,0" Name="freightCostLabel" VerticalAlignment="Top" />
+        <Label Content="Carring Charges on Rs:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,280,0,0" Name="carringChargesOnLabel" VerticalAlignment="Top" />
+        <Label Content="Carring Charges from:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,310,0,0" Name="carringChargesFromLabel" VerticalAlignment="Top" />
+        <Label Content="Carring Charges To:" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,340,0,0" Name="carringChargesToLabel" VerticalAlignment="Top" />
+        <Label Content="Carring Charges @" Grid.Row="3" Grid.Column="2" Height="25" HorizontalAlignment="Left" Margin="10,370,0,0" Name="carringChargesRateLabel" VerticalAlignment="Top" />
+
+        
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,40,0,0" Name="godownRentFromText" VerticalAlignment="Top" Width="100" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="GodownRentFrom">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  Margin="140,70,0,0" Name="godownRentToText" VerticalAlignment="Top" Width="100" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="GodownRentTo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,100,0,0" Name="godownRentCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Path="GodownRentCost" Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,130,0,0" Name="stockInsuranceText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="StockInsurance">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,160,0,0" Name="stockInsuranceCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="StockInsuranceCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,190,0,0" Name="freightFromText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="FreightFrom">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,220,0,0" Name="freightToText" VerticalAlignment="Top" Width="100" CharacterCasing="Upper">
+            <TextBox.Text>
+                <Binding  Path="FreightTo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,250,0,0" Name="freightCostText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Path="FreightCost">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,280,0,0" Name="carringChargesOnText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CarringChargesOn">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  Margin="140,310,0,0" Name="carringChargesFromText" VerticalAlignment="Top" Width="100" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="CarringChargesFrom">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <DatePicker Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left"  Margin="140,340,0,0" Name="carringChargesToText" VerticalAlignment="Top" Width="100" >
+            <DatePicker.SelectedDate>
+                <Binding  Path="CarringChargesTo">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+        <TextBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" Margin="140,370,0,0" Name="carringChargesRateText" VerticalAlignment="Top" Width="100" >
+            <TextBox.Text>
+                <Binding  Converter="{StaticResource DecimalNullFromStringConverter}" UpdateSourceTrigger="Explicit" Path="CarringChargesRate">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="rectangle1" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="3" Grid.RowSpan="3" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="rectangle2" VerticalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="3" Grid.Row="1" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Left" Margin="0" Name="rectangle4" VerticalAlignment="Stretch" Width="Auto" Grid.Row="3" Grid.Column="1" />
+        <Rectangle Style="{StaticResource rectangleStyle}" Height="Auto" HorizontalAlignment="Right" Margin="0" Name="rectangle5" VerticalAlignment="Stretch" Width="Auto" Grid.Row="3" Grid.Column="1" />
+    </Grid>
+</Page>
