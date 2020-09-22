@@ -9,11 +9,7 @@ for maintaining party details and 2) Transactions for maintaining transaction re
 
 ## Framerwork and Languages Used
 
--- .NET Framework
--- WPF - Windows Presentation Foundation
--- C#
--- XAML
--- LINQ
+-- .NET Framework, WPF - Windows Presentation Foundation, C#, XAML, LINQ
 
 ## DATABASE
 
